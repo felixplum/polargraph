@@ -1,0 +1,31 @@
+{
+	"folders": [
+		{
+			"name": "polargraph_controller",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"xstring": "cpp",
+			"algorithm": "cpp",
+			"memory": "cpp",
+			"limits": "cpp",
+			"utility": "cpp",
+			"deque": "cpp",
+			"iterator": "cpp",
+			"list": "cpp",
+			"map": "cpp",
+			"queue": "cpp",
+			"set": "cpp",
+			"vector": "cpp",
+			"xtree": "cpp",
+			"cmath": "cpp",
+			"cstdlib": "cpp",
+			"cstring": "cpp",
+			"string": "cpp",
+			"xhash": "cpp",
+			"xutility": "cpp"
+		}
+	}
+}
