@@ -2,11 +2,6 @@
 #define CONSTS_H
 
 
-static const char* ssid = "InternetBox";
-static const char* password = "70393568923149965319";
-
-        // Parameters
-    
 static const float anchor_distance = 1.;
 static const float wheel_circumference = 0.05 * 2*3.1415926535897932384626433832795;
 static const float LIMIT_ANGULAR_VELOCITY_DEG = 10*360;
