@@ -6,7 +6,6 @@
 class TrajectoryController {
     private:
         PointBuffer point_buffer;
-        StepperController steppers[2];
         float max_angular_velocity_deg = 180; // deg / s
         // State
         float l0_curr = 0, l1_curr = 0;
@@ -14,10 +13,14 @@ class TrajectoryController {
 
     public:  
         TrajectoryController();
+        StepperController steppers[2] = {StepperController(PIN_DIR_LM, PIN_PULSE_LM), StepperController(PIN_DIR_RM, PIN_PULSE_RM)};
+
         void update();
         void init(float x, float y);
+        void updateState();
         void generateNextSequence();
         void setMaxAngularVelocity(float vel_deg_s);
+        Point getCurrentLengths();
         bool is_active = false;
         PointBuffer* getBuffer();
 };
