@@ -23,11 +23,11 @@ class PointBuffer {
         Point* pop();
         bool addPoint(Point pnt);
         void addPointsFromList(const char* input);
+        static const uint32_t NUM_POINTS_MAX = 1000;
         int32_t num_points = 0;
         PointBuffer();
 
     private:
-        static const uint32_t NUM_POINTS_MAX = 1000;
         Point points[NUM_POINTS_MAX];
         uint32_t idx_start = 0; // points to first entry
         uint32_t idx_end = 0; // points one after last entry
