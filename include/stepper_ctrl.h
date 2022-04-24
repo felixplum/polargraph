@@ -7,7 +7,7 @@
 
 class StepperController {
     public:
-        StepperController();
+        StepperController(uint8_t pin_dir, uint8_t pin_pulse);
         void updateStepper();
         void incrementAngle(float angle_deg, int32_t sequence_time_musec);
         void setMaxAngularVelocity(float vel_deg_s);
@@ -29,6 +29,8 @@ class StepperController {
         bool is_pulse;
         uint64_t time_since_pulse_start;
         uint64_t time_since_pulse_end;
+        uint8_t pin_dir;
+        uint8_t pin_pulse;
         
 
 };
