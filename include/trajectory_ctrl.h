@@ -13,7 +13,10 @@ class TrajectoryController {
 
     public:  
         TrajectoryController();
-        StepperController steppers[2] = {StepperController(PIN_DIR_LM, PIN_PULSE_LM), StepperController(PIN_DIR_RM, PIN_PULSE_RM)};
+        StepperController steppers[2] = {
+            StepperController(PIN_DIR_LM, PIN_PULSE_LM),
+            StepperController(PIN_DIR_RM, PIN_PULSE_RM)
+        };
 
         void update();
         void init(float x, float y);
