@@ -102,8 +102,8 @@ void handleAddPoints() {
 void setup(void){
   // Pin Modes
   pinMode(LED_BUILTIN, OUTPUT);
+  
   pinMode(PIN_PULSE_LM, OUTPUT);
-
   pinMode(PIN_DIR_LM, OUTPUT);
   pinMode(PIN_PULSE_RM, OUTPUT);
   pinMode(PIN_DIR_RM, OUTPUT);
