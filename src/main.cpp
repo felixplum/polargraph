@@ -99,6 +99,22 @@ void handleAddPoints() {
       server.send(200, "text/plain", ret);
 }
 
+void handleDoCircle() {
+  if (!isValid()) return;
+
+    double R = 0.2;
+    double x_off = 0.3;
+    double y_off = 0.5;
+    int num_pnts = 1000;
+    for (int i = 0; i < num_pnts; i++) {
+        float t = 2*PI*i/num_pnts;
+        float x = x_off+R*cos(t);
+        float y = y_off+R*sin(t);
+        Point pnt(x,y,0);
+        buffer->addPoint(pnt);
+    }
+}
+
 void setup(void){
   // Pin Modes
   pinMode(LED_BUILTIN, OUTPUT);
@@ -133,6 +149,8 @@ void setup(void){
   server.on("/setInit", handleSetInit);
   server.on("/setSpeed", handleSetSpeed);
   server.on("/addPoints", handleAddPoints);
+  server.on("/doCircle", handleDoCircle);
+  
 
   server.begin();
   Serial.println("HTTP server started");
