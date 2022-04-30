@@ -24,14 +24,15 @@
 
     void TrajectoryController::updateState() {
         this->l0_curr = this->l0_offset + (float)this->steppers[0].total_steps_signed / (float)this->steppers[0].PULSE_PER_REVOLUTION * wheel_circumference;
-        this->l1_curr = this->l1_offset + (float)this->steppers[1].total_steps_signed / (float)this->steppers[1].PULSE_PER_REVOLUTION * wheel_circumference;
+        this->l1_curr = this->l1_offset - (float)this->steppers[1].total_steps_signed / (float)this->steppers[1].PULSE_PER_REVOLUTION * wheel_circumference;
     }
 
     void TrajectoryController::init(float x, float y) {
         // Sets the current lengths to x, y and resets steppers
-        float yy = y*y;
-        this->l0_offset = sqrt(x*x + yy);
-        this->l1_offset = sqrt((anchor_distance-x)*(anchor_distance-x) + yy);
+        float yy = (y-pen_y_offset)*(y-pen_y_offset);
+
+        this->l0_offset = sqrt((x-pen_x_offset)*(x-pen_x_offset) + yy);
+        this->l1_offset = sqrt((anchor_distance-x+pen_x_offset)*(anchor_distance-x+pen_x_offset) + yy);
         this->steppers[0].total_steps_signed = 0;
         this->steppers[1].total_steps_signed = 0;
         this->updateState();
@@ -53,9 +54,9 @@
         if (pnt_target == nullptr) return;
 
         // target lengths
-        float yy_target = pnt_target->y*pnt_target->y;
-        float l0_target = sqrt(pnt_target->x*pnt_target->x + yy_target);
-        float l1_target = sqrt((anchor_distance-pnt_target->x)*(anchor_distance-pnt_target->x) + yy_target);
+        float yy_target = (pnt_target->y-pen_y_offset)*(pnt_target->y-pen_y_offset);
+        float l0_target = sqrt((pnt_target->x-pen_x_offset)*(pnt_target->x-pen_x_offset) + yy_target);
+        float l1_target = sqrt((anchor_distance-pnt_target->x+pen_x_offset)*(anchor_distance-pnt_target->x+pen_x_offset) + yy_target);
         // angle increments
         float phi0_deg =  (l0_target - this->l0_curr) / wheel_circumference * 360.;      
         float phi1_deg =  (l1_target - this->l1_curr) / wheel_circumference * 360.;
@@ -97,6 +98,6 @@
         // Serial.print(l0_target);
         // Serial.print("\n");
         this->steppers[0].incrementAngle(phi0_deg, dt_musec);
-        this->steppers[1].incrementAngle(phi1_deg, dt_musec);
+        this->steppers[1].incrementAngle(-phi1_deg, dt_musec);
 
     }
